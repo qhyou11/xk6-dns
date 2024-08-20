@@ -1,4 +1,4 @@
-module github.com/NAlexandrov/xk6-tcp
+module github.com/qhyou11/xk6-dns
 
 go 1.20
 
