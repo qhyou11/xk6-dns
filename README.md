@@ -1,6 +1,6 @@
-# xk6-tcp
+# xk6-dns
 
-A k6 extension for sending strings to TCP port
+A k6 extension for dns lookup test.
 
 ## Build
 
@@ -21,23 +21,23 @@ Then:
 
   ```shell
   xk6 build master \
-    --with github.com/NAlexandrov/xk6-tcp
+    --with github.com/qhyou11/xk6-dns
   ```
 
 ## Example
 
 ```javascript
-import tcp from 'k6/x/tcp';
+import dns from 'k6/x/dns';
 import { check } from 'k6';
 
-const conn = tcp.connect('host:port');
+
 
 export default function () {
-  tcp.writeLn(conn, 'Say Hello');
-  let res = String.fromCharCode(...tcp.read(conn, 1024))
-  check (res, {
-    'verify ag tag': (res) => res.includes('Hello')
+  dns.Setup()
+  _, _, err := dns.Exchange("baidu.com","10.20.88.88:53")
+
+  check(err, {
+    'no err': (r) => r == nil,
   });
-  tcp.close(conn);
 }
 ```
