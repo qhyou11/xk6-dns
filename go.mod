@@ -50,3 +50,5 @@ require (
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/guregu/null.v3 v3.3.0 // indirect
 )
+
+replace github.com/NAlexandrov/xk6-tcp => github.com/qhyou11/xk6-dns latest
