@@ -19,9 +19,13 @@ func (dns *DNS) Setup() {
 	dns.c.ReadTimeout = 32 * time.Second
 }
 
-func (dns *DNS) Exchange(domain, addr string) (*dns.Msg, time.Duration, error) {
+func (dns *DNS) Exchange(domain, addr string) string {
 	q := GetRequest(domain)
-	return dns.c.Exchange(q, addr)
+	msg, _, err := dns.c.Exchange(q, addr)
+	if err != nil {
+		return ""
+	}
+	return msg.String()
 }
 
 func GetRequest(domain string) *dns.Msg {
