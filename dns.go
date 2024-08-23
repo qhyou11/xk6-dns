@@ -16,7 +16,7 @@ type DNS struct {
 }
 
 type Result struct {
-	msg      string
+	// msg      string
 	duration time.Duration
 }
 
@@ -29,10 +29,10 @@ func (dns *DNS) Exchange(domain, addr string) Result {
 	q := GetRequest(domain)
 	msg, _, err := dns.c.Exchange(q, addr)
 	if err != nil {
-		return Result{"", 0}
+		return Result{0}
 	}
 	elapsed := time.Since(start)
-	res := Result{msg.String(), elapsed}
+	res := Result{elapsed}
 	return res
 }
 
