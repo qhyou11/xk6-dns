@@ -15,17 +15,25 @@ type DNS struct {
 	c dns.Client
 }
 
+type Result struct {
+	msg      string
+	duration time.Duration
+}
+
 func (dns *DNS) Setup() {
 	dns.c.ReadTimeout = 32 * time.Second
 }
 
-func (dns *DNS) Exchange(domain, addr string) string {
+func (dns *DNS) Exchange(domain, addr string) Result {
+	start := time.Now()
 	q := GetRequest(domain)
 	msg, _, err := dns.c.Exchange(q, addr)
 	if err != nil {
-		return ""
+		return Result{"", 0}
 	}
-	return msg.String()
+	elapsed := time.Since(start)
+	res := Result{msg.String(), elapsed}
+	return res
 }
 
 func GetRequest(domain string) *dns.Msg {
