@@ -27,7 +27,7 @@ func (dns *DNS) Setup() {
 func (dns *DNS) Exchange(domain, addr string) Result {
 	start := time.Now()
 	q := GetRequest(domain)
-	msg, _, err := dns.c.Exchange(q, addr)
+	_, _, err := dns.c.Exchange(q, addr)
 	if err != nil {
 		return Result{0}
 	}
