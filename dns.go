@@ -34,7 +34,7 @@ func (dns *DNS) Exchange(domain, addr string) Result {
 	}
 	// elapsed := time.Since(start)
 	res := Result{
-		msg: msgcontent.String(),
+		msgcontent.String(),
 	}
 	return res
 }
