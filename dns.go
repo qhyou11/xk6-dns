@@ -31,10 +31,12 @@ func (dns *DNS) Exchange(domain, addr string) Result {
 	fmt.Println("Test1111")
 	msgcontent, _, err := dns.c.Exchange(q, addr)
 	if err != nil {
+		fmt.Println(err)
 		return Result{
 			""}
 	}
 	// elapsed := time.Since(start)
+	fmt.Println(msgcontent.String())
 	res := Result{
 		msgcontent.String(),
 	}
