@@ -1,7 +1,6 @@
 package dns
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/miekg/dns"
@@ -30,11 +29,13 @@ func (dns *DNS) Exchange(domain, addr string) Result {
 	q := GetRequest(domain)
 	_, _, err := dns.c.Exchange(q, addr)
 	if err != nil {
-		return Result{0}
+		return Result{
+			duration: 0}
 	}
 	elapsed := time.Since(start)
-	fmt.Println(elapsed)
-	res := Result{123}
+	res := Result{
+		duration: elapsed,
+	}
 	return res
 }
 
