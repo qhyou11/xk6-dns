@@ -1,7 +1,6 @@
 package dns
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/miekg/dns"
@@ -16,31 +15,19 @@ type DNS struct {
 	c dns.Client
 }
 
-type Result struct {
-	msg string
-	// duration time.Duration
-}
-
 func (dns *DNS) Setup() {
 	dns.c.ReadTimeout = 32 * time.Second
 }
 
-func (dns *DNS) Exchange(domain, addr string) Result {
-	// start := time.Now()
+func (dns *DNS) Exchange(domain, addr string) string,time.Duration {
+	start := time.Now()
 	q := GetRequest(domain)
-	fmt.Println("Test1111")
-	msgcontent, _, err := dns.c.Exchange(q, addr)
+	msg, _, err := dns.c.Exchange(q, addr)
+	elapsed := time.Since(start)
 	if err != nil {
-		fmt.Println(err)
-		return Result{
-			msg: ""}
+		return "",elapsed
 	}
-	// elapsed := time.Since(start)
-	fmt.Println(msgcontent.String())
-	res := Result{
-		msg: msgcontent.String(),
-	}
-	return res
+	return msg.String(),elapsed
 }
 
 func GetRequest(domain string) *dns.Msg {
