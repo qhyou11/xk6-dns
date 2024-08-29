@@ -15,10 +15,6 @@ type DNS struct {
 	c dns.Client
 }
 
-<<<<<<<<<<<<<<  ✨ Codeium Command ⭐  >>>>>>>>>>>>>>>>
-// SetupWithTimeout sets the timeout for DNS lookups. The timeout is specified
-// in seconds.
-<<<<<<<  3e11df6d-fa8a-4e7d-96ea-fa062450fa2c  >>>>>>>
 func (dns *DNS) SetupWithTimeout(timeout_time time.Duration) {
 	dns.c.ReadTimeout = timeout_time * time.Second
 }
